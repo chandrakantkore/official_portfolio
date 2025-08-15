@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hostel Management System</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f0f2f5;
+}
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.header h1 { font-size: 2em; }
+.card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.table th, .table td { text-align: center; vertical-align: middle; word-wrap: break-word; }
+.nav-tabs>li>a { font-weight: bold; }
+.dark-theme {
+    background-color: #121212;
+    color: #eee;
+}
+.dark-theme .card { background-color: #1e1e1e; color: #eee; }
+.dark-theme input, .dark-theme select { background-color: #333; color: #eee; border-color: #555; }
+.dark-theme .btn { border: none; }
+.theme-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+@media(max-width: 768px){
+    .table-responsive { overflow-x: auto; }
+    .header h1 { font-size: 1.5em; }
+    .nav-tabs { display: flex; flex-wrap: wrap; }
+    .nav-tabs>li { flex: 1 1 50%; text-align: center; }
+    .btn { margin-top: 10px; width: 100%; }
+    #studentForm .form-group, #roomForm .form-group { margin-bottom: 15px; }
+}
+@media(max-width:480px){
+    .header h1 { font-size: 1.2em; }
+    .header p { font-size: 0.9em; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🏨 Hostel Management System</h1>
+    <p>Manage Students, Rooms, and Bookings easily</p>
+</div>
+
+<div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#students">Students</a></li>
+      <li><a data-toggle="tab" href="#rooms">Rooms</a></li>
+      <li><a data-toggle="tab" href="#bookings">Bookings</a></li>
+    </ul>
+
+    <div class="tab-content" style="margin-top:20px;">
+        <div id="students" class="tab-pane fade in active">
+            <div class="card">
+                <h3>Student Registration</h3>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" id="studentName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" class="form-control" id="studentAge" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Room Number</label>
+                        <select class="form-control" id="roomNumber" required></select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Student List</h3>
+                <input type="text" id="searchStudent" class="form-control" placeholder="Search by Name or Room" style="margin-bottom:10px;">
+                <div class="table-responsive">
+                <table class="table table-bordered" id="studentTable">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Room</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="rooms" class="tab-pane fade">
+            <div class="card">
+                <h3>Room Management</h3>
+                <form id="roomForm">
+                    <div class="form-group">
+                        <label>Room Number</label>
+                        <input type="text" class="form-control" id="newRoomNumber" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Room</button>
+                </form>
+                <ul id="roomList" class="list-group" style="margin-top:15px;"></ul>
+            </div>
+        </div>
+
+        <div id="bookings" class="tab-pane fade">
+            <div class="card">
+                <h3>Bookings</h3>
+                <div class="table-responsive">
+                <table class="table table-bordered" id="bookingTable">
+                    <thead>
+                      <tr>
+                        <th>Student</th>
+                        <th>Room</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="theme-toggle" id="themeToggle">🌙</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+
+</script>
+</body>
+</html>

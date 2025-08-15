@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Explorer Pro</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Arial, sans-serif; transition: background-color 0.5s ease,color 0.5s ease; padding:20px; }
+.app-container { max-width:900px; margin:auto; text-align:center; }
+.app-header h1 { font-size:2.5rem; margin-bottom:0.2em; }
+.app-header p { font-size:1.2rem; color:#666; margin-bottom:1.5em; }
+.search-container { display:flex; justify-content:center; gap:10px; margin-bottom:2em; flex-wrap:wrap; }
+input[type="text"] { padding:10px; width:60%; font-size:1rem; border:1px solid #ccc; border-radius:4px; transition: all 0.3s; }
+input[type="text"]:focus { border-color:#3498db; outline:none; box-shadow:0 0 5px rgba(52,152,219,0.5); }
+button { padding:10px 20px; font-size:1rem; border:none; background-color:#3498db; color:white; border-radius:4px; cursor:pointer; transition:0.3s; }
+button:hover { background-color:#2980b9; transform: scale(1.05); }
+.weather-container { display:flex; flex-direction:column; align-items:center; gap:2em; }
+.current-weather { display:flex; align-items:center; gap:20px; padding:1em; border-radius:10px; background: rgba(255,255,255,0.15); position:relative; overflow:hidden; backdrop-filter:blur(5px); transition: all 0.5s ease; }
+.current-weather .icon img { width:80px; transition: transform 0.3s ease; }
+.current-weather .icon img:hover { transform: scale(1.2); }
+.current-weather .info h2 { font-size:1.5rem; }
+.forecast { display:flex; justify-content:space-around; flex-wrap:wrap; gap:15px; }
+.day { flex:1 1 22%; background: rgba(255,255,255,0.15); border-radius:10px; padding:10px; text-align:center; position:relative; overflow:hidden; backdrop-filter:blur(5px); transition: transform 0.3s ease; }
+.day:hover { transform: translateY(-5px); }
+.day .icon img { width:50px; }
+.loading { display:none; font-size:1.2rem; color:#555; margin-top:10px; }
+.theme-toggle { position:fixed; top:20px; right:20px; background:#fff; padding:10px; border-radius:50%; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2); transition:0.3s; }
+.theme-toggle:hover { transform: scale(1.2); }
+footer { margin-top:20px; }
+body.clear { background: linear-gradient(to top,#ffeaa7,#f6e58d); }
+body.clouds { background: linear-gradient(to top,#dfe6e9,#b2bec3); }
+body.rain { background: linear-gradient(to top,#74b9ff,#0984e3); }
+body.snow { background: linear-gradient(to top,#dfefff,#ffffff); }
+body.default { background-color:#f0f0f0; }
+.rain::after { content:''; position:absolute; width:2px; height:100%; background:rgba(255,255,255,0.2); animation:rainDrop 1s linear infinite; top:0; left:50%; transform:translateX(-50%); }
+@keyframes rainDrop {0%{top:-100%}100%{top:100%}}
+@media (max-width:768px){.forecast{flex-direction:column;}.day{width:80%; margin:auto; margin-bottom:10px;}.search-container{flex-direction:column;}.input[type="text"]{width:100%;}}
+@media (max-width:480px){.app-header h1{font-size:2rem;}.current-weather{flex-direction:column;}.current-weather .icon img{width:60px;}.day .icon img{width:40px;}}
+</style>
+</head>
+<body class="default">
+<div class="app-container">
+<header class="app-header">
+<h1>Weather Explorer</h1>
+<p>Stay updated with the latest weather conditions</p>
+</header>
+<div class="search-container">
+<input type="text" id="city" placeholder="Enter city name..." />
+<button onclick="getWeather()">Search</button>
+<button onclick="toggleUnit()">°C / °F</button>
+</div>
+<div class="loading" id="loading">Loading...</div>
+<div class="weather-container">
+<section class="current-weather">
+<div class="icon"></div>
+<div class="info">
+<h2 id="cityName">City</h2>
+<p id="temperature">--°C</p>
+<p id="description">Description: --</p>
+<p id="humidity">Humidity: --%</p>
+<p id="wind">Wind: -- m/s</p>
+<p id="pressure">Pressure: -- hPa</p>
+</div>
+</section>
+<section class="forecast">
+<div class="day"><p class="weekday">Day</p><div class="icon"></div><p class="temp">--°C</p></div>
+<div class="day"><p class="weekday">Day</p><div class="icon"></div><p class="temp">--°C</p></div>
+<div class="day"><p class="weekday">Day</p><div class="icon"></div><p class="temp">--°C</p></div>
+<div class="day"><p class="weekday">Day</p><div class="icon"></div><p class="temp">--°C</p></div>
+</section>
+<footer>
+<b>**Software Design By <a href="https://www.instagram.com/sanketkore_21/profilecard/?igsh=NnlqY3Y2NDd1eG56" target="_blank">@Chandrakantkore</a></b>
+</footer>
+</div>
+</div>
+<div class="theme-toggle" id="themeToggle">🌙</div>
+
+<script>
+let isCelsius = true;
+
+
+async function getWeather(cityName){
+const cityInput=document.getElementById('city');
+const city=cityName||cityInput.value.trim();
+if(!city) return alert('Please enter a city');
+const apiKey='da5cc509bc967933cf9f957a7a06eb9b';
+const currentWeatherUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${isCelsius?'metric':'imperial'}`;
+const forecastWeatherUrl=`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${isCelsius?'metric':'imperial'}`;
+const loading=document.getElementById('loading');
+loading.style.display='block';
+try{
+const currentResponse=await fetch(currentWeatherUrl);
+const currentData=await currentResponse.json();
+if(currentData.cod!==200){loading.style.display='none'; return alert(`Error: ${currentData.message}`);}
+document.getElementById('cityName').textContent=currentData.name;
+document.getElementById('temperature').textContent=`Temperature: ${currentData.main.temp}°${isCelsius?'C':'F'}`;
+document.getElementById('description').textContent=`Description: ${currentData.weather[0].description}`;
+document.getElementById('humidity').textContent=`Humidity: ${currentData.main.humidity}%`;
+document.getElementById('wind').textContent=`Wind: ${currentData.wind.speed} m/s`;
+document.getElementById('pressure').textContent=`Pressure: ${currentData.main.pressure} hPa`;
+const currentIcon=currentData.weather[0].icon;
+document.querySelector('.current-weather .icon').innerHTML=`<img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png" alt="weather icon">`;
+changeBackground(currentData.weather[0].main.toLowerCase());
+
+const forecastResponse=await fetch(forecastWeatherUrl);
+const forecastData=await forecastResponse.json();
+const forecastDays=document.querySelectorAll('.day');
+forecastDays.forEach((day,index)=>{
+const forecast=forecastData.list[index*8];
+if(forecast){
+const forecastIcon=forecast.weather[0].icon;
+const weekday=new Date(forecast.dt_txt).toLocaleDateString('en-US',{weekday:'long'});
+day.querySelector('.weekday').textContent=weekday;
+day.querySelector('.icon').innerHTML=`<img src="https://openweathermap.org/img/wn/${forecastIcon}@2x.png" alt="forecast icon">`;
+day.querySelector('.temp').textContent=`${Math.round(forecast.main.temp)}°${isCelsius?'C':'F'}`;
+}});
+loading.style.display='none';
+}catch(err){console.error(err);loading.style.display='none';alert('Failed to retrieve weather data.');}}
+
+function changeBackground(condition){
+const body=document.body; body.className='';
+switch(condition){
+case 'clear': body.classList.add('clear'); break;
+case 'clouds': body.classList.add('clouds'); break;
+case 'rain': body.classList.add('rain'); break;
+case 'snow': body.classList.add('snow'); break;
+default: body.classList.add('default'); break;
+}}
+
+
+function toggleUnit(){isCelsius=!isCelsius; getWeather();}
+
+
+const themeBtn=document.getElementById('themeToggle');
+function applyTheme(theme){
+if(theme==='dark'){document.body.style.color='#fff'; themeBtn.textContent='☀️';}
+else{document.body.style.color='#000'; themeBtn.textContent='🌙';}
+localStorage.setItem('theme',theme);}
+const savedTheme=localStorage.getItem('theme')||'light';
+applyTheme(savedTheme);
+themeBtn.addEventListener('click',()=>{
+const curTheme=localStorage.getItem('theme');
+applyTheme(curTheme==='dark'?'light':'dark');
+});
+
+
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(pos=>{
+getWeatherByCoords(pos.coords.latitude,pos.coords.longitude);
+});
+}
+async function getWeatherByCoords(lat,lon){
+const apiKey='da5cc509bc967933cf9f957a7a06eb9b';
+const url=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${isCelsius?'metric':'imperial'}`;
+try{const res=await fetch(url); const data=await res.json(); getWeather(data.name);}catch(e){console.error(e);}
+}
+</script>
+</body>
+</html>

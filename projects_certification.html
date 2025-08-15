@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects & Certifications</title>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+h1 {
+    text-align: center;
+    color: #4e73df;
+    margin-bottom: 30px;
+}
+.section {
+    margin-bottom: 50px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+.card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    transform: translateY(30px);
+}
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.card h3 {
+    margin-bottom: 10px;
+    color: #1cc88a;
+}
+.card p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.card a {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #4e73df;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.card a:hover {
+    background-color: #2e59d9;
+    transform: scale(1.05);
+}
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+@media (max-width:768px){
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    }
+}
+@media (max-width:480px){
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+<body>
+
+<h1>Projects & Certifications</h1>
+
+<div class="section">
+    <h2 style="color:#4e73df; margin-bottom:15px;">Projects</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="weather.png" alt="Weather App">
+            <h3>Weather App</h3>
+            <p>A simple weather application using HTML, CSS & JavaScript to show live weather info.</p>
+            <a href="weatherapp.html" target="_blank">View Project</a>
+        </div>
+        <div class="card">
+            <img src="calendar.jpg" alt="Festival Calendar">
+            <h3>Festival Calendar System With Business promotions</h3>
+            <p>Interactive calendar system with business promotions integrated for festivals.</p>
+            <a href="festivalcalendar.html" target="_blank">View Project</a>
+        </div>
+        <div class="card">
+            <img src="portfolio.png" alt="Portfolio">
+            <h3>Portfolio</h3>
+            <p>My personal portfolio showcasing projects, skills and achievements.</p>
+            <a href="index1.html" target="_blank">View Project</a>
+        </div>
+        <div class="card">
+            <img src="3d.png" alt="3D Car Racing">
+            <h3>3D Car Racing</h3>
+            <p>A 3D racing game developed with JavaScript and HTML Canvas.(Working On Project)</p>
+            <a href="3dgame.html" target="_blank">View Project</a>
+        </div>
+        <div class="card">
+            <img src="hostel.jpeg" alt="Hostel Management System">
+            <h3>Hostel Management System</h3>
+            <p>Web-based hostel management system with login, registration, and dashboard features.(Working On Project)</p>
+            <a href="hostelmgm.html" target="_blank">View Project</a>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2 style="color:#1cc88a; margin-bottom:15px;">Certifications</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="achieve.png" alt="Google Chat">
+            <h3>Google Chat</h3>
+            <p>Completed Google Chat Course and gained practical knowledge in communication tools.</p>
+            <a href="https://simpli.app.link/bO2jWPu1RTb" target="_blank">View Certificate</a>
+        </div>
+        <div class="card">
+            <img src="achieve.png" alt="C Programming">
+            <h3>C Programming</h3>
+            <p>Completed 2 Months Training Programme on C Programming Language.</p>
+            <a href="c.jpg" target="_blank">View Certificate</a>
+        </div>
+        <div class="card">
+            <img src="achieve.png" alt="Digital Transformation">
+            <h3>Digital Transformation with Google Cloud</h3>
+            <p>Introduction to Digital Transformation course with Google Cloud fundamentals.</p>
+            <a href="https://simpli.app.link/bO2jWPu1RTb" target="_blank">View Certificate</a>
+        </div>
+        <div class="card">
+            <img src="achieve.png" alt="Maharashtra Elementary Grade Drawing Examination">
+            <h3>Maharashtra Elementary Grade Drawing Examination</h3>
+            <p>Exam covers Design, Memory Drawing, Still-life, Nature, Freehand, and Geometry.</p>
+            <a href="elementary.jpg" target="_blank">View Certificate</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© <span id="year"></span> Chandrakant Kore</p>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const cards=document.querySelectorAll('.card');
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+},{threshold:0.1});
+cards.forEach(card=>observer.observe(card));
+</script>
+
+</body>
+</html>

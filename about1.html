@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
+<style>
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f7f8fa;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
+    }
+    .container {
+        width: 90%;
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    h2 {
+        background: #4e73df;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+        font-size: 24px;
+    }
+    p, li { font-size: 16px; }
+    .section {
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: 0.3s, opacity 1s ease-out, transform 0.8s ease-out;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    .projects button {
+        background: #1cc88a;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+        width: 100%;
+        font-size: 16px;
+    }
+    .projects button:hover { background: #17a673; transform: scale(1.05); }
+    a { color: #4e73df; text-decoration: none; transition: 0.3s; }
+    a:hover { text-decoration: underline; color: #2e59d9; }
+    .social img {
+        margin: 10px;
+        border-radius: 50%;
+        transition: 0.3s;
+        width: 50px;
+        height: 50px;
+    }
+    .social img:hover { transform: rotate(10deg) scale(1.1); }
+    marquee { margin-top: 20px; color: #4e73df; font-weight: bold; }
+    @media (max-width: 768px) {
+        h2 { font-size: 22px; padding: 8px 12px; }
+        p, li { font-size: 15px; }
+        .projects button { font-size: 15px; padding: 8px 12px; }
+    }
+    @media (max-width: 480px) {
+        h2 { font-size: 20px; padding: 6px 10px; }
+        p, li { font-size: 14px; }
+        .projects button { font-size: 14px; padding: 6px 10px; }
+        .social img { width: 40px; height: 40px; margin: 5px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="section">
+        <h2>PERSONAL INFORMATION</h2>
+        <p><b>Chandrakant Shivaji Kore</b><br>
+        Ranisawargaon, Parbhani, Maharashtra, India.<br>
+        Mob. No. 9168477851<br>
+        cha********@gmail.com</p>
+        <p style="font-size:larger;">- "Aspiring Web Developer" & "Passionate In Software Developing".</p>
+    </div>
+
+    <div class="section">
+        <h2>INTRODUCTION</h2>
+        <p>Hello! I’m Chandrakant Kore, a Bachelor in Computer Application student at Swami Ramanand Teerth Marathwada University, Nanded. I have a passion for Web Development and Graphic Design.<br><br>
+        Throughout my studies, I’ve developed skills in Microsoft Office, Adobe Creative Suite, coding languages, and research methods. I enjoy graphic design, solving complex problems, and exploring new technologies.<br><br>
+        I have also completed a 2-month training programme on programming in C. These experiences have strengthened my understanding of programming languages like C, Web Dev, Ms-Office, Python, MySQL, and Java.<br><br>
+        I’m always eager to learn and take on new challenges. Feel free to explore my portfolio to see my work. Thank you for visiting!</p>
+    </div>
+
+    <div class="section">
+        <h2>CERTIFICATIONS</h2>
+        <ul>
+            <li>Completed 2 Months Training Programme on Programming in C - <a href="c.jpg">View Certificate</a></li>
+            <li>Google Chat Course - <a href="https://simpli.app.link/bO2jWPu1RTb">View Certificate</a></li>
+            <li>Introduction to Digital Transformation With Google Cloud - <a href="https://simpli.app.link/bO2jWPu1RTb">View Certificate</a></li>
+            <li>Maharashtra Elementary Grade Drawing Examination - <a href="elementary.jpg">View Certificate</a></li>
+        </ul>
+    </div>
+
+    <div class="section projects">
+        <h2>PROJECTS</h2>
+        <a href="index2.html" target="_blank"><button>1. Weather App</button></a>
+        <a href="index1.html" target="_blank"><button>2. Portfolio</button></a>
+        <a href="indexcalendar.html" target="_blank"><button>3. Festival Calendar System With Business Promotion</button></a>
+        <a href="index3dgame.html" target="_blank"><button>4. 3D Car Racing</button></a>
+        <a href="indexostel.html" target="_blank"><button>5. Hostel Management System</button></a>
+    </div>
+
+    <div class="section social">
+        <h2>SOCIAL</h2>
+        <a href="https://www.linkedin.com/in/chandrakant-kore-b31047301" target="_blank"><img src="LinkedIn.png" alt="LinkedIn"></a>
+        <a href="https://www.instagram.com/sanketkore_21" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+    </div>
+</div>
+
+<marquee behavior="" direction="">Thanks You For visiting !</marquee>
+
+<script>
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+        });
+    }, { threshold: 0.1 });
+    sections.forEach(section => { observer.observe(section); });
+</script>
+
+</body>
+</html>

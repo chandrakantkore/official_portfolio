@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Car Racing</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body, html{height:100%; background:#222; display:flex; justify-content:center; align-items:center;}
+  .gameArea{
+    position:relative;
+    width:300px;
+    max-width:90vw;
+    aspect-ratio: 3/5;
+    background:#555;
+    border:3px solid #fff;
+    overflow:hidden;
+    touch-action: none;
+  }
+  .roadLine{
+    position:absolute;
+    width:10px;
+    height:80px;
+    background:white;
+    left:50%;
+    transform: translateX(-50%);
+    animation: move 1s linear infinite;
+  }
+  @keyframes move{
+    0%{top:-80px;}
+    100%{top:100%;}
+  }
+  .car{
+    position:absolute;
+    width:40px;
+    height:70px;
+    background:red;
+    bottom:20px;
+    left:130px;
+    border-radius:8px;
+  }
+  .obstacle{
+    position:absolute;
+    width:40px;
+    height:70px;
+    background:green;
+    top:-100px;
+    border-radius:8px;
+  }
+  @media(max-width:500px){
+    .roadLine{width:3px;height:50px;}
+    .car{width:30px;height:50px;}
+    .obstacle{width:30px;height:50px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="gameArea" id="gameArea">
+  <div class="roadLine" style="top:0;"></div>
+  <div class="roadLine" style="top:150px;"></div>
+  <div class="roadLine" style="top:300px;"></div>
+  <div class="roadLine" style="top:450px;"></div>
+  <div class="car" id="playerCar"></div>
+</div>
+
+<script>
+  const gameArea = document.getElementById('gameArea');
+  const playerCar = document.getElementById('playerCar');
+  let carPosition = 130;
+  let obstacles = [];
+  let gameSpeed = 5;
+  let score = 0;
+  let gameOver = false;
+
+  document.addEventListener('keydown', e=>{
+    const step = 20;
+    const maxLeft = gameArea.clientWidth - playerCar.offsetWidth;
+    if(e.key==='ArrowLeft' && carPosition>0) carPosition -=step;
+    if(e.key==='ArrowRight' && carPosition<maxLeft) carPosition +=step;
+    playerCar.style.left = carPosition+'px';
+  });
+
+ 
+  let startX = null;
+  gameArea.addEventListener('touchstart', e=>{
+    startX = e.touches[0].clientX;
+  });
+  gameArea.addEventListener('touchmove', e=>{
+    if(!startX) return;
+    let touchX = e.touches[0].clientX;
+    let diff = touchX - startX;
+    const maxLeft = gameArea.clientWidth - playerCar.offsetWidth;
+    if(diff > 30 && carPosition < maxLeft){
+      carPosition +=20;
+      startX = touchX;
+    } else if(diff < -30 && carPosition >0){
+      carPosition -=20;
+      startX = touchX;
+    }
+    playerCar.style.left = carPosition+'px';
+  });
+  gameArea.addEventListener('touchend', e=>{ startX = null; });
+
+  function createObstacle(){
+    const obs = document.createElement('div');
+    obs.classList.add('obstacle');
+    const laneCount = Math.floor(gameArea.clientWidth / playerCar.offsetWidth);
+    obs.style.left = Math.floor(Math.random()*laneCount)*playerCar.offsetWidth + 'px';
+    obs.style.top = '-70px';
+    gameArea.appendChild(obs);
+    obstacles.push(obs);
+  }
+
+  setInterval(()=>{ if(!gameOver) createObstacle(); },2000);
+
+  function moveObstacles(){
+    if(gameOver) return;
+    obstacles.forEach((obs,index)=>{
+      let obsTop = parseInt(obs.style.top);
+      obsTop += gameSpeed;
+      obs.style.top = obsTop+'px';
+      const obsLeft = parseInt(obs.style.left);
+      const carBottom = gameArea.clientHeight - playerCar.offsetHeight - 20;
+      if(obsTop + obs.offsetHeight > carBottom && obsTop < gameArea.clientHeight){
+        if(carPosition < obsLeft + obs.offsetWidth && carPosition + playerCar.offsetWidth > obsLeft){
+          alert('Game Over! Score: '+score);
+          gameOver = true;
+          window.location.reload();
+        }
+      }
+      if(obsTop > gameArea.clientHeight){
+        obs.remove();
+        obstacles.splice(index,1);
+        score++;
+      }
+    });
+    requestAnimationFrame(moveObstacles);
+  }
+  moveObstacles();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandrakant Kore CV</title>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+    color: #333;
+}
+
+a { text-decoration: none; color: #3498db; }
+a:hover { text-decoration: underline; }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+
+.sidebar {
+    flex: 1 1 320px;
+    background: #2c3e50;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.sidebar img {
+    width: 90%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 5px solid #3498db;
+    object-fit: cover;
+}
+
+.sidebar h2 {
+    margin: 10px 0;
+    font-size: 22px;
+}
+
+.sidebar p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+.social-links a img {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    transition: transform 0.3s;
+}
+.social-links a img:hover {
+    transform: scale(1.2);
+}
+
+.skills-container {
+    margin-top: 20px;
+    text-align: left;
+}
+.skill {
+    margin-bottom: 10px;
+}
+.skill-name {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+.skill-bar {
+    width: 100%;
+    background: #34495e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.skill-progress {
+    height: 12px;
+    width: 0%;
+    background: #3498db;
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}
+
+.main {
+    flex: 2 1 600px;
+    padding: 30px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    background: #3498db;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+th {
+    background: #ecf0f1;
+}
+
+ul { margin: 5px 0 15px 20px; }
+
+footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    color: #555;
+    font-size: 14px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar img { max-width: 250px; }
+}
+
+@media (max-width: 900px) {
+    .container { flex-direction: column; }
+    .sidebar, .main { flex: 1 1 100%; text-align: center; }
+    .main { padding: 20px; }
+    .sidebar img { width: 60%; max-width: 200px; }
+    .social-links a img { width: 35px; height: 35px; }
+    table, th, td { font-size: 12px; }
+}
+
+@media (max-width: 600px){
+    .sidebar img { width: 70%; max-width: 180px; }
+    .sidebar h2 { font-size: 18px; }
+    .sidebar p { font-size: 12px; }
+    .skill-name { font-size: 12px; }
+    .section h2 { font-size: 16px; padding: 6px 12px; }
+    table, th, td { font-size: 11px; }
+}
+
+@media (max-width: 400px){
+    .sidebar img { width: 75%; max-width: 150px; }
+    .social-links a img { width: 30px; height: 30px; }
+    ul { padding-left: 15px; font-size: 12px; }
+    .main { padding: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <img src="resumephoto.png" alt="Chandrakant Kore">
+        <h2>Chandrakant Shivaji Kore</h2>
+        <p>Ranisawargaon, Parbhani</p>
+        <p>Maharashtra, India</p>
+        <p>Mob: 9168477851</p>
+        <p>Email: cha********@gmail.com</p>
+
+        <div class="skills-container">
+            <h3>Skills</h3>
+            <div class="skill"><div class="skill-name">Web Dev</div><div class="skill-bar"><div class="skill-progress" style="width:90%"></div></div></div>
+            <div class="skill"><div class="skill-name">Java</div><div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div></div>
+            <div class="skill"><div class="skill-name">Python</div><div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div></div>
+            <div class="skill"><div class="skill-name">MySQL</div><div class="skill-bar"><div class="skill-progress" style="width:85%"></div></div></div>
+            <div class="skill"><div class="skill-name">C</div><div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div></div>
+        </div>
+
+        <div class="social-links">
+            <h3>Connect</h3>
+            <a href="https://www.linkedin.com/in/chandrakant-kore-b31047301"><img src="LinkedIn.png" alt="LinkedIn"></a>
+            <a href="https://www.instagram.com/_sanketkore_"><img src="instagram.png" alt="Instagram"></a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="section">
+            <h2>Career Objective</h2>
+            <p>To be associated with a progressive organization that gives me opportunity to prove my potential and upgrade my skills while contributing to team and organization growth.</p>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Course</th>
+                    <th>Board/University</th>
+                    <th>Year</th>
+                    <th>Marks/CGPA</th>
+                </tr>
+                <tr><td>SSC</td><td>Maharashtra Board</td><td>2021</td><td>87%</td></tr>
+                <tr><td>HSC</td><td>Maharashtra Board</td><td>2023</td><td>69.5%</td></tr>
+                <tr><td>BCA FY</td><td>SRTMU Nanded</td><td>2024</td><td>9.0 CGPA</td></tr>
+                <tr><td>BCA SY</td><td>SRTMU Nanded</td><td>2025</td><td>8.25 CGPA</td></tr>
+            </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <ul>
+                <li><a href="weatherapp.html">Weather App</a></li>
+                <li><a href="index.html">Portfolio</a></li>
+                <li><a href="festivalcalendar.html">Festival Calendar With Business Promotion</a></li>
+                <li><a href="3dgame.html">3D Car Game</a></li>
+                <li><a href="hostelmgm.html">Hostel Management System</a></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Work Experience</h2>
+            <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Post</th><th>Organization</th><th>From</th><th>To</th><th>Duration</th><th>Duty</th>
+                </tr>
+                <tr>
+                    <td>Quality Auditor</td>
+                    <td>Robershaw Controls Pvt Ltd, Pune</td>
+                    <td>15/04/2024</td>
+                    <td>09/09/2024</td>
+                    <td>4 Months 25 Days</td>
+                    <td>Checking Thermostats Products</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Personal Profile</h2>
+            <ul>
+                <li>DOB: 09/09/2005 | Marital Status: Single | Nationality: Indian</li>
+                <li>Languages: English, Hindi, Marathi</li>
+                <li>Hobbies: Sports, Travel, Riding</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer>
+&copy; Chandrakant Shivaji Kore
+</footer>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const skills = document.querySelectorAll('.skill-progress');
+    skills.forEach(skill => {
+        const width = skill.style.width;
+        skill.style.width = '0%';
+        setTimeout(() => { skill.style.width = width; }, 100);
+    });
+});
+</script>
+
+</body>
+</html>

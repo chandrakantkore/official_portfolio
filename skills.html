@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Skills - Chandrakant Kore</title>
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        color: #4e73df;
+        margin-bottom: 40px;
+    }
+    .skill-container {
+        max-width: 700px;
+        margin: auto;
+        margin-bottom: 25px;
+    }
+    .skill-label {
+        font-size: 16px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+    .skill-label img {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+    .skill-bar {
+        width: 100%;
+        background-color: #ddd;
+        border-radius: 25px;
+        overflow: hidden;
+        height: 25px;
+        margin-bottom: 15px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.6s ease;
+    }
+    .skill-bar-fill {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #1cc88a, #4e73df);
+        text-align: right;
+        line-height: 25px;
+        color: white;
+        padding-right: 10px;
+        border-radius: 25px;
+        transition: width 1.5s ease-in-out;
+    }
+    .skill-bar.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+</head>
+<body>
+
+<h1>My Skills</h1>
+
+<div class="skill-container">
+    <div class="skill-label"><img src="html.png" alt="Web Dev">Web Development</div>
+    <div class="skill-bar" data-percent="90">
+        <div class="skill-bar-fill">90%</div>
+    </div>
+</div>
+
+<div class="skill-container">
+    <div class="skill-label"><img src="java.png" alt="Java">Java</div>
+    <div class="skill-bar" data-percent="80">
+        <div class="skill-bar-fill">80%</div>
+    </div>
+</div>
+
+<div class="skill-container">
+    <div class="skill-label"><img src="python.png" alt="Python">Python</div>
+    <div class="skill-bar" data-percent="75">
+        <div class="skill-bar-fill">75%</div>
+    </div>
+</div>
+
+<div class="skill-container">
+    <div class="skill-label"><img src="mysql.png" alt="MySQL">MySQL</div>
+    <div class="skill-bar" data-percent="85">
+        <div class="skill-bar-fill">85%</div>
+    </div>
+</div>
+
+<div class="skill-container">
+    <div class="skill-label"><img src="msoffice.png" alt="MS Office">MS Office</div>
+    <div class="skill-bar" data-percent="90">
+        <div class="skill-bar-fill">90%</div>
+    </div>
+</div>
+
+<div class="skill-container">
+    <div class="skill-label"><img src="c.png" alt="C">C Programming</div>
+    <div class="skill-bar" data-percent="75">
+        <div class="skill-bar-fill">75%</div>
+    </div>
+</div>
+  <footer class="mt-12 p-6 text-sm muted">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 items-start">
+      <div>
+     
+     
+
+      <div>
+        <h4 class="font-semibold">Thanks for Visiting .</h4>
+        <p class="mt-2 muted">© <span id="year"></span> Chandrakant Kore</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+<script>
+    // Animate skill bars on scroll
+    const skillBars = document.querySelectorAll('.skill-bar');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                const bar = entry.target.querySelector('.skill-bar-fill');
+                const percent = entry.target.getAttribute('data-percent');
+                bar.style.width = percent + '%';
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    skillBars.forEach(bar => observer.observe(bar));
+</script>
+
+</body>
+</html>
