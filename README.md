@@ -239,11 +239,11 @@ https://github.com/chandrakantkore
 
 LinkedIn
 
-(Add your LinkedIn URL)
 
+https://www.linkedin.com/in/chandrakant-kore-b31047301
 Email
 
-(Add your Email)
+chandrakantkore000@gmail.com
 
 ---
 
